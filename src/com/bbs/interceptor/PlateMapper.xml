@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.PlateMapper">
+	<!-- 根据 plateTitle 查找对应的 Plate -->
+	<select id="findPlateByTitle" resultType="Plate">
+		select * from bbs_plate where plateTitle=#{plateTitle}
+	</select>
+	<!-- 添加新板块到数据库中 -->
+	<insert id="addNewPlate" parameterType="Plate">
+		insert into bbs_plate(plateTitle,plateMessage) 
+			values(#{plateTitle},#{plateMessage})
+	</insert>
+	<!-- 获取所有的 Plate -->
+	<select id="findAllPlates" resultType="Plate">
+		select * from bbs_plate
+	</select>
+	<!-- 修改 plate 的 isEnable为1 -->
+	<update id="updatePlateIsEnableById" parameterType="int">
+		update bbs_plate set isEnable=1 where plateId=#{plateId}
+	</update>
+	<!-- 修改 plate 的 isEnable为0 -->
+	<update id="updatePlateUnIsEnableById" parameterType="int">
+		update bbs_plate set isEnable=0 where plateId=#{plateId}
+	</update>
+	<!-- 根据 plateId 查找对应plate -->
+	<select id="findPlateById" parameterType="int" resultType="Plate">
+		select * from bbs_plate where plateId=#{plateId}
+	</select>
+	<!-- 根据 id 修改板块的标题和描述 -->
+	<update id="updatePlateById" parameterType="Plate">
+		update bbs_plate set plateTitle=#{plateTitle},plateMessage=#{plateMessage}
+			where plateId=#{plateId}
+	</update>
+</mapper>
+
+
+
